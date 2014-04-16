@@ -55,6 +55,12 @@
 		font-weight: 600;
 		color: #3e3e3e;
 	}
+	strong.kosten
+	{
+		font-weight: 600;
+		color: #FFFFFF;
+	}
+	
 	
 	h1, h2, h3, h4, h5, h6
 	{
