@@ -18,8 +18,47 @@
 		<!--[if lte IE 9]><link rel="stylesheet" href="css/ie9.css" /><![endif]-->
 		<!--[if lte IE 8]><script src="js/html5shiv.js"></script><link rel="stylesheet" href="css/ie8.css" /><![endif]-->
 		<!--[if lte IE 7]><link rel="stylesheet" href="css/ie7.css" /><![endif]-->
+		
+		  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <style type="text/css" media="screen">
+    body {font-family: 'Lucida Grande', Verdana, Arial, sans-serif; padding: 5px;}
+    table.records {margin: 1em; border-collapse: collapse; }
+    table.records td {padding: .2em .5em; }
+    table.records td.distance {width: 5em; font-weight: bold;}
+    table.records td.time {width: 5em; text-align: right;}
+    table.records td.date {}
+    table.records td.location {width: 15em;}
+    a {color: navy; text-decoration: none; font-weight: bold;}
+    a:visited {font-weight: normal;}
+    a:hover {color: crimson;}
+  </style>
+  
+  <script type="text/javascript" src="jquery-1.7.2.min.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $.ajax({
+      type: "GET",
+      url: "http://speedskatingresults.com/api/xml/personal_records.php",
+      data: "skater=273",
+      dataType: "xml",
+      success: function(xml) {
+        $(xml).find('record').each(function() {
+          var distance = $(this).find('distance').text()+"m";
+          var time = $(this).find('time').text();
+          var date = $(this).find('date').text();
+          var location = $(this).find('location').text();
+          $('<tr></tr>').html('<td class="distance">'+distance+'</td><td class="time">'+time+
+            '</td><td class="date">'+date+'</td>'+
+            <td class="location">'+location+'</td>').appendTo('#prs');
+        });
+      }
+    });
+  });
+  </script>
 	</head>
 	<body>
+		
+		
 		<!-- Facebook -->
 		<div id="fb-root"></div>
 <div id="fb-root"></div>
@@ -93,15 +132,10 @@
 							<div class="4u">
 								<section class="box box-style1">
 									<h3>PR'S</h3>
-									<ul>
-										<li>100M : <strong>11.85</strong></li>
-										<li>300M : <strong>28.20</strong></li>
-										<li>500M : <strong>40.75</strong></li>
-										<li>700M : <strong>1:15.34</strong></li>
-										<li>1000M : <strong>1:18.76</strong></li>
-										<li>1500M : <strong>2:01.66</strong></li>
-										<li>3000M : <strong>4:18.11</strong></li>
-									</ul>				
+									<table id="prs" class="records">
+										
+									</table>
+
 								</section>
 							</div>
 						</div>
